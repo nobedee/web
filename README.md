@@ -10,3 +10,6 @@ Another edit on GitHub. Then another.
 Had to remove using "git rm --cached README.md"
 Then commit. and push to again to remote repo.
 When text below, then that was edit before pull example.
+
+This is the edit for the pull example.
+When this sentence above sentence are here, then the pull example has occured.
