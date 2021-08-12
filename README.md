@@ -1,4 +1,7 @@
 # web
+THIS LINE WAS ADDED TO PUSH NEW BRANCH TO REMOTE EXAMPLE.
+BELOW LINES WERE FROM PREVIOUS EXAMPLES.
+
 Repository for learning git and github.
 File created on GitHub remote repo. 
 
@@ -13,3 +16,4 @@ When text below, then that was edit before pull example.
 
 This is the edit for the pull example.
 When this sentence above sentence are here, then the pull example has occured.
+
