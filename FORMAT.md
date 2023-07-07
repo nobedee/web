@@ -13,9 +13,7 @@ There are 4 rules in "Makefile", and they are targeted numerically (i.e. make 1)
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <hr>
-# one
 
-two
 | Issue ID | Section | Rendered HTML | Suggested Edit |
 | --- | --- | --- | --- |
 | Unwanted link | [Link to Section](https://curl.se/docs/manpage.html#--proto) <hr> ```--proto <protocols> ``` Examples <br><strong>A. Modifier list </strong>(3 occurences): <br> 1. \[x\] is + \| - \| = <br> <strong>B. Modifer list examples</strong>(3 occurences): <br> \[x\] is --proto and \[y\] -ftps \| -all,https,+http \| [y]=http,https | \<p class="level2"\>\<a class="bold" href="#-[\x]"\>\[x\] \[y]\</a\> \[z\]..\</p\> | IP p.level2 \\n .SH \[x\] => IP p.level2 |
