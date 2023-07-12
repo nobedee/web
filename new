@@ -22,7 +22,7 @@
 # Web:     https://daniel.haxx.se/projects/roffit
 
 my $version = "0.14";
-
+ 
 use strict;
 #use warnings;
 use HTML::Entities qw(encode_entities);
