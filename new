@@ -108,7 +108,7 @@ sub showp {
 
 sub defaultcss {
     print $OutFH <<ENDOFCSS
-<STYLE type="text/css">
+<style type="text/css">
 pre {
   overflow: auto;
   margin: 0;
@@ -152,7 +152,7 @@ p.roffit {
  text-align: center;
  font-size: 80%;
 }
-</STYLE>
+</style>
 ENDOFCSS
     ;
 }
@@ -213,6 +213,7 @@ sub linkfile {
                 my $link;
                 if($anchor{$l}) {
                     $link="<a class=\"$style\" href=\"#$l\">$name</a>";
+                    $link =~ s/$link[,.]/$link/g;
                 }
                 else {
                     if($mandir) {
@@ -254,8 +255,8 @@ sub linkfile {
             }
 
             # convert https://, http:// and ftp:// URLs to <a href> links
-            $field =~ s/(^|\W)((https|http|ftp):\/\/[a-z0-9\-._~%:\/?\#\[\]\@!\$&'()*+,;=]+)/$1<a href=\"$2\">$2<\/a>/gi;
-
+			$field =~ s/(^|\W)((https|http|ftp):\/\/[a-z0-9\-._~%:\/?\#\[\]\@!\$&'()*+,;=]+)/$1<a href=\"$2\">$2<\/a>/gi;
+			
             # convert (uppercase only) "RFC [number]" to a link
             $field =~ s/(^|\W)RFC ?(\d+)/$1<a href=\"http:\/\/www.ietf.org\/rfc\/rfc$2.txt\">RFC $2<\/a>/g;
 
@@ -639,7 +640,7 @@ else {
 print $OutFH @conv;
 print $OutFH <<ROFFIT
 <p class="roffit">
- This HTML page was made with <a href="http://daniel.haxx.se/projects/roffit/">roffit</a>.
+ This HTML page was made with <a href="http://daniel.haxx.se/projects/roffit/">roffit</a>.</p> 
 ROFFIT
     ;
 
