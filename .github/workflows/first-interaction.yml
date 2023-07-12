@@ -13,9 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/first-interaction@main
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        issue-message: |
-          It worked for issue
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-message: |
+            It worked for issue
           pr-message: |
             It worked for pull.
