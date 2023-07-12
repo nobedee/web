@@ -9,13 +9,13 @@ on:
     
 jobs:
   check_for_first_interaction
-    runs-on: ubutu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      0 uses: actions/first-interacction@main
+      - uses: actions/first-interaction@main
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         issue-message: |
-          It worked for issu
+          It worked for issue
           pr-message: |
             It worked for pull.
