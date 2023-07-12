@@ -255,7 +255,7 @@ sub linkfile {
 
             # convert https://, http:// and ftp:// URLs to <a href> links
             $field =~ s/(^|\W)((https|http|ftp):\/\/[a-z0-9\-._~%:\/?\#\[\]\@!\$&'()*+,;=]+)/$1<a href=\"$2\">$2<\/a>/gi;
-            
+
             # convert (uppercase only) "RFC [number]" to a link
             $field =~ s/(^|\W)RFC ?(\d+)/$1<a href=\"http:\/\/www.ietf.org\/rfc\/rfc$2.txt\">RFC $2<\/a>/g;
 
