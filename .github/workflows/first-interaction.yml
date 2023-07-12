@@ -1,0 +1,21 @@
+name: first-interaction
+
+on:
+  issues:
+    types: [opened]
+  pull_request:
+    branches: [main]
+    types: [opened]
+    
+jobs:
+  check_for_first_interaction
+    runs-on: ubutu-latest
+    steps:
+      - uses: actions/checkout@v3
+      0 uses: actions/first-interacction@main
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: |
+          It worked for issu
+          pr-message: |
+            It worked for pull.
