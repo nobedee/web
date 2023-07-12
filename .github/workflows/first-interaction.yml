@@ -16,6 +16,6 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           issue-message: |
-            It worked for issue
+            It worked for issue            
           pr-message: |
             It worked for pull.
