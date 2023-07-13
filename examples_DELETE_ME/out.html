@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>curl - How To Use (condensed)</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+		<link rel="stylesheet" type="text/css" href="https://curl.se/curl.css">
+		<link rel="shortcut icon" href="https://curl.se/favicon.ico">
+		<link rel="icon" href="https://curl.se/logo/curl-symbol.svg" type="image/svg+xml">
+		<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+		<link rel="STYLESHEET" type="text/css" href="https://curl.se/manpage.css">
+  <style>
+   .sideStay ul {
+    list-style: none;
+   }
+   .sideStay {
+    display: inline-block;
+    position:fixed;           
+    padding:5px; 
+    background: #093754;
+    color:white;    
+   }
+   .sideStayTopLeft {
+    cursor: pointer;
+    top: 13px;
+    left: 200px;
+    padding: 5px 55px;
+    border: 2px solid white;
+   }
+   .sideStayLeft {
+    top:-10px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);        
+    padding: 10px;
+    margin: 10px 10px 10px 0px;    
+    font-size: 16px;
+   }
+   .sideStayLeft a {
+    color: white;
+   }
+   .sideStayLeft div.searchBox {
+    background: white;
+    color: black;
+    width: 100%;
+    padding: 10px;
+    margin-left: -10px; 
+   }
+   .sideStayLeft input {
+    z-index: 1;
+    width: 80%;
+   }
+   .sideStayLeft img {
+    width: 10%;
+    margin-top: 2px;
+    padding-top: 0;
+    position: relative;
+    top: 7px;
+   }
+   .sideStayLeft ul {
+    max-height: 800px;
+    max-width: 300px;
+    overflow-y: scroll;
+    margin-top: 0px;
+   }
+   button {
+    cursor: pointer;
+    background: #093754;
+    color: white;
+    padding: 5px;
+    width: 150px;
+    height: 40px;
+    margin: auto;
+   }
+  </style>
+	</head>
+	<body>
+		<div class="main">
+			<div class="menu">
+				<div class="dropdown">
+     <a class="dropbtn" href="https://curl.se//docs/projdocs.html">Project</a>
+      <div class="dropdown-content">
+      <a href="https://curl.se//docs/bugbounty.html">Bug Bounty</a>
+      <a href="https://curl.se//docs/bugs.html">Bug Report</a>
+      <a href="https://curl.se//docs/code-of-conduct.html">Code of conduct</a>
+      <a href="https://curl.se//docs/libs.html">Dependencies</a>
+      <a href="https://curl.se//donation.html">Donate</a>
+      <a href="https://curl.se//docs/faq.html">FAQ</a>
+      <a href="https://curl.se//docs/features.html">Features</a>
+      <a href="https://curl.se//docs/governance.html">Governance</a>
+      <a href="https://curl.se//docs/history.html">History</a>
+      <a href="https://curl.se//docs/install.html">Install</a>
+      <a href="https://curl.se//docs/knownbugs.html">Known Bugs</a>
+      <a href="https://curl.se//logo/">Logo</a>
+      <a href="https://curl.se//docs/todo.html">TODO</a>
+      <a href="https://curl.se//about.html">Web Site Info</a>
+     </div>
+				</div>
+
+				<div class="dropdown">
+     <a class="dropbtn" href="https://curl.se//docs/protdocs.html">Protocols</a>
+     <div class="dropdown-content">
+      <a href="https://curl.se//docs/alt-svc.html">alt-svc</a>
+      <a href="https://curl.se//docs/caextract.html">CA Extract</a>
+      <a href="https://curl.se//docs/hsts.html">HSTS</a>
+      <a href="https://curl.se//docs/http-cookies.html">HTTP cookies</a>
+      <a href="https://curl.se//docs/http2.html">HTTP/2</a>
+      <a href="https://curl.se//docs/http3.html">HTTP/3</a>
+      <a href="https://curl.se//docs/mqtt.html">MQTT</a>
+      <a href="https://curl.se//docs/sslcerts.html">SSL certs</a>
+      <a href="https://curl.se//docs/ssl-compared.html">SSL libs compared</a>
+      <a href="https://curl.se//docs/url-syntax.html">URL syntax</a>
+      <a href="https://curl.se//docs/websocket.html">WebSocket</a>
+     </div>
+				</div>
+
+				<div class="dropdown">
+    <a class="dropbtn" href="https://curl.se//docs/reldocs.html">Releases</a>
+     <div class="dropdown-content">
+      <a href="https://curl.se//changes.html">Changelog</a>
+      <a href="https://curl.se//docs/releases.html">Release Table</a>
+      <a href="https://curl.se//docs/security.html">Security Problems</a>
+      <a href="https://curl.se//docs/versions.html">Version Nums</a>
+      <a href="https://curl.se//docs/vulnerabilities.html">Vulnerabilities</a>
+     </div>
+				</div>
+
+				<div class="dropdown">
+					<a class="dropbtn" href="https://curl.se//docs/tooldocs.html">Tool</a>
+      <div class="dropdown-content">
+       <a href="https://curl.se//docs/comparison-table.html">Comparison Table</a>
+       <a href="https://curl.se//docs/manpage.html">curl man page</a>
+       <a href="https://curl.se//docs/httpscripting.html">HTTP Scripting</a>
+       <a href="https://curl.se//docs/mk-ca-bundle.html">mk-ca-bundle</a>
+       <a href="https://curl.se//docs/manual.html">Tutorial</a>
+      </div>
+				</div>
+
+				<div class="dropdown">
+					<a class="dropbtn" href="https://curl.se//docs/whodocs.html">Who and Why</a>
+      <div class="dropdown-content">
+       <a href="https://curl.se//docs/companies.html">Companies</a>
+       <a href="https://curl.se//docs/copyright.html">Copyright</a>
+       <a href="https://curl.se//sponsors.html">Sponsors</a>
+       <a href="https://curl.se//docs/thanks.html">Thanks</a>
+       <a href="https://curl.se//docs/thename.html">The name</a>
+			  </div>
+		</div>
+		</div>
+  
+  <div class="sideStay sideStayLeft">
+  <button id="searchButton" onclick="toggleSearchButton(this.nextElementSibling, this)" data-onoff="0">Show Option Menu</button><br>
+  <div style="display:none">  
+  <div class="searchBox">   
+   <label for="optionSearchField">Search Options</label><br>
+   <img src="https://curl.se/logo/curl-symbol.svg" alt="curl symbol"><input id="optionSearchField" name="optionSearchField" type="search" oninput="searchOptions(this.value)">
+  </div>  
+   <ul id="optionMenu">
+    <h3>Current page options:</h3><hr>    
+    <li><a href="#-K">-K, --config</a></li>
+    <li><a href="#-D">-D, --dump-header</a></li>
+    <li><a href="#--fail-early">--fail-early</a></li>
+    <li><a href="#-P">-P, --ftp-port</a></li>
+    <li><a href="#--next">-:, --next</a></li>
+    <li><a href="#-N">-N, --no-buffer</a></li>
+    <li><a href="#--output">--output-dir</a></li>
+    <li><a href="#-o">-o, --output</a></li>
+    <li><a href="#--parallel-max">--parallel-max</a></li>
+    <li><a href="#-Z">-Z, --parallel</a></li>
+    <li><a href="#--progress-bar">-#, --progress-bar</a></li>
+    <li><a href="#--proto">--proto</a></li>
+    <li><a href="#-x">-x, --proxy</a></li>
+    <li><a href="#--url">--url</a></li>
+<br><h3 style="display:none">If all options:</h3><hr>
+<div id="fullOptionList" style="display:none">
+<li><a href="#">--abstract-unix-socket</a></li> 
+<li><a href="#">--alt-svc &lt;file name&gt;</a></li> 
+<li><a href="#">--anyauth </a></li> 
+<li><a href="#">-a, --append</a></li> 
+<li><a href="#">--basic </a></li> 
+<li><a href="#">--cacert &lt;file&gt; </a></li> 
+<li><a href="#">--capath &lt;dir&gt;</a></li> 
+<li><a href="#">-E, --cert &lt;certificate[:password]&gt;</a></li> 
+<li><a href="#">--cert-status </a></li> 
+<li><a href="#">--cert-type &lt;type&gt; </a></li> 
+<li><a href="#">--ciphers &lt;list of ciphers&gt; </a></li> 
+<li><a href="#">--compressed</a></li> 
+<li><a href="#">--compressed-ssh </a></li> 
+<li><a href="#">-K, --config &lt;file&gt; </a></li> 
+<li><a href="#">--connect-timeout &lt;seconds&gt; </a></li> 
+<li><a href="#">--connect-to &lt;HOST1:PORT1:HOST2:PORT2&gt; </a></li> 
+<li><a href="#">-C, --continue-at &lt;offset&gt; </a></li> 
+<li><a href="#">-b, --cookie &lt;data|filename&gt; </a></li> 
+<li><a href="#">-c, --cookie-jar &lt;filename&gt; </a></li> 
+<li><a href="#">--create-dirs </a></li> 
+<li><a href="#">--crlf</a></li> 
+<li><a href="#">--crlfile &lt;file&gt; </a></li> 
+<li><a href="#">-d, --data &lt;data&gt; </a></li> 
+<li><a href="#">--data-ascii &lt;data&gt; </a></li> 
+<li><a href="#">--data-binary &lt;data&gt; </a></li> 
+<li><a href="#">--data-raw &lt;data&gt; </a></li> 
+<li><a href="#">--data-urlencode &lt;data&gt; </a></li> 
+<li><a href="#">--delegation &lt;LEVEL&gt; </a></li> 
+<li><a href="#">--digest</a></li> 
+<li><a href="#">-q, --disable </a></li> 
+<li><a href="#">--disable-eprt</a></li> 
+<li><a href="#">--disable-epsv</a></li> 
+<li><a href="#">--disallow-username-in-url </a></li> 
+<li><a href="#">--dns-interface &lt;interface&gt; </a></li> 
+<li><a href="#">--dns-ipv4-addr &lt;address&gt; </a></li> 
+<li><a href="#">--dns-ipv6-addr &lt;address&gt; </a></li> 
+<li><a href="#">--dns-servers &lt;addresses&gt; </a></li> 
+<li><a href="#">--doh-url &lt;URL&gt; </a></li> 
+<li><a href="#">-D, --dump-header &lt;filename&gt; </a></li> 
+<li><a href="#">--egd-file &lt;file&gt; </a></li> 
+<li><a href="#">--engine &lt;name&gt; </a></li> 
+<li><a href="#">--etag-save &lt;file&gt; </a></li> 
+<li><a href="#">--etag-compare &lt;file&gt; </a></li> 
+<li><a href="#">--expect100-timeout &lt;seconds&gt; </a></li> 
+<li><a href="#">-f, --fail</a></li> 
+<li><a href="#">--fail-early</a></li> 
+<li><a href="#">--false-start </a></li> 
+<li><a href="#">-F, --form &lt;name=content&gt; </a></li> 
+<li><a href="#">--form-string &lt;name=string&gt; </a></li> 
+<li><a href="#">--ftp-account &lt;data&gt; </a></li> 
+<li><a href="#">--ftp-alternative-to-user &lt;command&gt; </a></li> 
+<li><a href="#">--ftp-create-dirs </a></li> 
+<li><a href="#">--ftp-method &lt;method&gt; </a></li> 
+<li><a href="#">--ftp-pasv</a></li> 
+<li><a href="#">-P, --ftp-port &lt;address&gt; Use PORT instead of PASV</a></li> 
+<li><a href="#">--ftp-pret</a></li> 
+<li><a href="#">--ftp-skip-pasv-ip </a></li> 
+<li><a href="#">--ftp-ssl-ccc </a></li> 
+<li><a href="#">--ftp-ssl-ccc-mode &lt;active/passive&gt; </a></li> 
+<li><a href="#">--ftp-ssl-control </a></li> 
+<li><a href="#">-G, --get </a></li> 
+<li><a href="#">-g, --globoff </a></li> 
+<li><a href="#">--happy-eyeballs-timeout-ms &lt;milliseconds&gt; </a></li> 
+<li><a href="#">--haproxy-protocol </a></li> 
+<li><a href="#">-I, --head</a></li> 
+<li><a href="#">-H, --header &lt;header/@file&gt; </a></li> 
+<li><a href="#">-h, --help</a></li> 
+<li><a href="#">--hostpubmd5 &lt;md5&gt; Acceptable MD5 hash of the host public key</a></li> 
+<li><a href="#">--http0.9 </a></li> 
+<li><a href="#">-0, --http1.0 </a></li> 
+<li><a href="#">--http1.1 </a></li> 
+<li><a href="#">--http2 </a></li> 
+<li><a href="#">--http2-prior-knowledge </a></li> 
+<li><a href="#">--http3 </a></li> 
+<li><a href="#">--ignore-content-length </a></li> 
+<li><a href="#">-i, --include </a></li> 
+<li><a href="#">-k, --insecure </a></li> 
+<li><a href="#">--interface &lt;name&gt;</a></li> 
+<li><a href="#">-4, --ipv4 </a></li> 
+<li><a href="#">-6, --ipv6 </a></li> 
+<li><a href="#">-j, --junk-session-c</a></li> 
+<li><a href="#">--keepalive-time &lt;seconds&gt;</a></li> 
+<li><a href="#">--key &lt;key&gt; </a></li> 
+<li><a href="#">--key-type &lt;type&gt;</a></li> 
+<li><a href="#">--krb &lt;level&gt; </a></li> 
+<li><a href="#">--libcurl &lt;file&gt;</a></li> 
+<li><a href="#">--limit-rate &lt;speed&gt;</a></li> 
+<li><a href="#">-l, --list-only </a></li> 
+<li><a href="#">--local-port &lt;num/range&gt;</a></li> 
+<li><a href="#">-L, --location </a></li> 
+<li><a href="#">--location-t</a></li> 
+<li><a href="#">--login-options &lt;options&gt;</a></li> 
+<li><a href="#">--mail-auth &lt;address&gt;</a></li> 
+<li><a href="#">--mail-from &lt;address&gt;</a></li> 
+<li><a href="#">--mail-rcpt &lt;address&gt;</a></li> 
+<li><a href="#">-M, --manual </a></li> 
+<li><a href="#">--max-filesize &lt;bytes&gt;</a></li> 
+<li><a href="#">--max-redirs &lt;num&gt;</a></li> 
+<li><a href="#">-m, --max-time &lt;seconds&gt;</a></li> 
+<li><a href="#">--metalink </a></li> 
+<li><a href="#">--negotiate </a></li> 
+<li><a href="#">-n, --netrc </a></li> 
+<li><a href="#">--netrc-file &lt;filename&gt;</a></li> 
+<li><a href="#">--netrc-o</a></li> 
+<li><a href="#">-:, --next </a></li> 
+<li><a href="#">--no-alpn </a></li> 
+<li><a href="#">-N, --no-buffer </a></li> 
+<li><a href="#">--no-keepalive </a></li> 
+<li><a href="#">--no-npn </a></li> 
+<li><a href="#">--no-progress-meter</a></li> 
+<li><a href="#">--no-sessionid </a></li> 
+<li><a href="#">--noproxy &lt;no-proxy-list&gt;</a></li> 
+<li><a href="#">--ntlm </a></li> 
+<li><a href="#">--ntlm-wb </a></li> 
+<li><a href="#">--oauth2-bearer &lt;token&gt;</a></li> 
+<li><a href="#">-o, --output &lt;file&gt;</a></li> 
+<li><a href="#">-Z, --parallel </a></li> 
+<li><a href="#">--parallel-i</a></li> 
+<li><a href="#">--parallel-max </a></li> 
+<li><a href="#">--pass &lt;phrase&gt;</a></li> 
+<li><a href="#">--path-as-is </a></li> 
+<li><a href="#">--pinnedpubkey &lt;hashes&gt;</a></li> 
+<li><a href="#">--post301 </a></li> 
+<li><a href="#">--post302 </a></li> 
+<li><a href="#">--post303 </a></li> 
+<li><a href="#">--preproxy [protocol://]host[:port]</a></li> 
+<li><a href="#">-#, --progress-bar </a></li> 
+<li><a href="#">--proto &lt;protocols&gt; </a></li> 
+<li><a href="#">--proto-default &lt;protocol&gt;</a></li> 
+<li><a href="#">--proto-redir &lt;protocols&gt;</a></li> 
+<li><a href="#">-x, --proxy [protocol://]host[:port]</a></li> 
+<li><a href="#">--proxy-anyauth </a></li> 
+<li><a href="#">--proxy-basic </a></li> 
+<li><a href="#">--proxy-cacert &lt;file&gt;</a></li> 
+<li><a href="#">--proxy-capath &lt;dir&gt; </a></li> 
+<li><a href="#">--proxy-cert &lt;cert[:passwd]&gt; </a></li> 
+<li><a href="#">--proxy-cert-type &lt;type&gt; </a></li> 
+<li><a href="#">--proxy-ciphers &lt;list&gt; </a></li> 
+<li><a href="#">--proxy-crlfile &lt;file&gt; </a></li> 
+<li><a href="#">--proxy-digest</a></li> 
+<li><a href="#">--proxy-header &lt;header/@file&gt; </a></li> 
+<li><a href="#">--proxy-insecure </a></li> 
+<li><a href="#">--proxy-key &lt;key&gt; </a></li> 
+<li><a href="#">--proxy-key-type &lt;type&gt; </a></li> 
+<li><a href="#">--proxy-negotiate </a></li> 
+<li><a href="#">--proxy-ntlm</a></li> 
+<li><a href="#">--proxy-pass &lt;phrase&gt; </a></li> 
+<li><a href="#">--proxy-pinnedpubkey &lt;hashes&gt; </a></li> 
+<li><a href="#">--proxy-service-name &lt;name&gt; </a></li> 
+<li><a href="#">--proxy-ssl-allow-beast </a></li> 
+<li><a href="#">--proxy-tls13-ciphers &lt;list&gt; </a></li> 
+<li><a href="#">--proxy-tlsauthtype &lt;type&gt; </a></li> 
+<li><a href="#">--proxy-tlspassword &lt;string&gt; </a></li> 
+<li><a href="#">--proxy-tlsuser &lt;name&gt; </a></li> 
+<li><a href="#">--proxy-tlsv1 </a></li> 
+<li><a href="#">-U, --proxy-user &lt;user:password&gt; </a></li> 
+<li><a href="#">--proxy1.0 &lt;host[:port]&gt; </a></li> 
+<li><a href="#">-p, --proxytunnel </a></li> 
+<li><a href="#">--pubkey &lt;key&gt;</a></li> 
+<li><a href="#">-Q, --quote </a></li> 
+<li><a href="#">--random-file &lt;file&gt; </a></li> 
+<li><a href="#">-r, --range &lt;range&gt; </a></li> 
+<li><a href="#">--raw </a></li> 
+<li><a href="#">-e, --referer &lt;URL&gt; </a></li> 
+<li><a href="#">-J, --remote-header-name </a></li> 
+<li><a href="#">-O, --remote-name </a></li> 
+<li><a href="#">--remote-name-all </a></li> 
+<li><a href="#">-R, --remote-time </a></li> 
+<li><a href="#">-X, --request &lt;command&gt; </a></li> 
+<li><a href="#">--request-target </a></li> 
+<li><a href="#">--resolve &lt;host:port:address[,address]...&gt; </a></li> 
+<li><a href="#">--retry &lt;num&gt; </a></li> 
+<li><a href="#">--retry-connrefused </a></li> 
+<li><a href="#">--retry-delay &lt;seconds&gt; </a></li> 
+<li><a href="#">--retry-max-time &lt;seconds&gt; </a></li> 
+<li><a href="#">--sasl-authzid &lt;identity&gt;</a></li> 
+<li><a href="#">--sasl-ir </a></li> 
+<li><a href="#">--service-name &lt;name&gt; </a></li> 
+<li><a href="#">-S, --show-error</a></li> 
+<li><a href="#">-s, --silent</a></li> 
+<li><a href="#">--socks4 &lt;host[:port]&gt; </a></li> 
+<li><a href="#">--socks4a &lt;host[:port]&gt; </a></li> 
+<li><a href="#">--socks5 &lt;host[:port]&gt; </a></li> 
+<li><a href="#">--socks5-basic </a></li> 
+<li><a href="#">--socks5-gssapi </a></li> 
+<li><a href="#">--socks5-gssapi-nec </a></li> 
+<li><a href="#">--socks5-gssapi-service &lt;name&gt; </a></li> 
+<li><a href="#">--socks5-hostname &lt;host[:port]&gt; </a></li> 
+<li><a href="#">-Y, --speed-limit &lt;speed&gt;</a></li> 
+<li><a href="#">-y, --speed-time &lt;seconds&gt;</a></li> 
+<li><a href="#">--ssl </a></li> 
+<li><a href="#">--ssl-allow-beast </a></li> 
+<li><a href="#">--ssl-no-revoke </a></li> 
+<li><a href="#">--ssl-reqd</a></li> 
+<li><a href="#">-2, --sslv2 </a></li> 
+<li><a href="#">-3, --sslv3 </a></li> 
+<li><a href="#">--stderr</a></li> 
+<li><a href="#">--styled-output </a></li> 
+<li><a href="#">--suppress-connect-headers </a></li> 
+<li><a href="#">--tcp-fastopen</a></li> 
+<li><a href="#">--tcp-nodelay </a></li> 
+<li><a href="#">-t, --telnet-option &lt;opt=val&gt; </a></li> 
+<li><a href="#">--tftp-blksize &lt;value&gt; </a></li> 
+<li><a href="#">--tftp-no-options </a></li> 
+<li><a href="#">-z, --time-cond &lt;time&gt; </a></li> 
+<li><a href="#">--tls-max &lt;VERSION&gt; </a></li> 
+<li><a href="#">--tls13-ciphers &lt;list&gt; </a></li> 
+<li><a href="#">--tlsauthtype &lt;type&gt; </a></li> 
+<li><a href="#">--tlspassword </a></li> 
+<li><a href="#">--tlsuser &lt;name&gt; </a></li> 
+<li><a href="#">-1, --tlsv1 </a></li> 
+<li><a href="#">--tlsv1.0 </a></li> 
+<li><a href="#">--tlsv1.1 </a></li> 
+<li><a href="#">--tlsv1.2 </a></li> 
+<li><a href="#">--tlsv1.3 </a></li> 
+<li><a href="#">--tr-encoding </a></li> 
+<li><a href="#">--trace &lt;file&gt;</a></li> 
+<li><a href="#">--trace-ascii &lt;file&gt; </a></li> 
+<li><a href="#">--trace-time</a></li> 
+<li><a href="#">--unix-socket &lt;path&gt; </a></li> 
+<li><a href="#">-T, --upload-file &lt;file&gt; </a></li> 
+<li><a href="#">--url &lt;url&gt; </a></li> 
+<li><a href="#">-B, --use-ascii </a></li> 
+<li><a href="#">-u, --user &lt;user:password&gt; </a></li> 
+<li><a href="#">-A, --user-agent &lt;name&gt; </a></li> 
+<li><a href="#">-v, --verbose </a></li> 
+<li><a href="#">-V, --version </a></li> 
+<li><a href="#">-w, --write-out &lt;format&gt; </a></li> 
+<li><a href="#">--xattr </a></li> 
+</div>
+   </ul>
+</div>  </div>    
+  <div id="toTop" class="sideStay sideStayTopLeft" style="display:none" 
+  onclick="window.scrollTo(0,0);">To Top</div>
+  <div class="contents">
+		<h1>Roffit Output - curl.1 the man page</h1>
+		<div class="relatedbox" style="display:block">
+			<b>Page Quick Links: </b>
+			<br><a href="https://github.com/curl/curl/issues/11381" target="_blank">GitHub Issue Page</a>
+   <hr>
+   <b>Suggested Makefile Edits</b>
+   <br><a href="#-colon" 
+    onclick="showTop(1);">Duplicate Anchor -:, --next</a>
+   <br><a href="#-hash" 
+    onclick="showTop(1);">Duplicate Anchor -#, --progres-bar</a>    
+			<br><a href="#-K" 
+    onclick="showTop(1); showLink('b');">Broken Link</a>
+			<br><a href="#-x" 
+    onclick="showTop(1); showLink('u');">Unwanted Link - (http://)</a>
+			<br><a href="#--url" 
+    onclick="showTop(1); showLink('u');">Unwanted Link - (http://) &amp; (ftp://)</a><br>
+    <div id="curlSuggestedOut" style="display:none">
+     <b>Suggested Man Page Edits</b>
+     <br><a href="#-P" 
+     onclick="showTop(1);">ftp.d</a>
+     <br><a href="#--proto" 
+     onclick="showTop(1);">proto.d</a>    
+     <br><a href="#NOPROXY" 
+     onclick="showTop(1);">page-footer - NO_PROXY</a>
+    </div>
+    <b></b>
+		</div>
+		<!--_OUT_-->
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl - transfer a URL </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2>
+<p class="level0"><span Class="bold">curl [options / URLs]</span> </p><a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0"><span Class="bold">curl</span> is a tool for transferring data from or to a server. It supports these protocols: DICT, FILE, FTP, FTPS, GOPHER, GOPHERS, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, MQTT, POP3, POP3S, RTMP, RTMPS, RTSP, SCP, SFTP, SMB, SMBS, SMTP, SMTPS, TELNET, TFTP, WS and WSS. The command is designed to work without user interaction. </p>
+<p class="level0">curl offers a busload of useful tricks like proxy support, user authentication, FTP upload, HTTP post, SSL connections, cookies, file transfer resume and more. As you will see below, the number of features will make your head spin. </p>
+<p class="level0">curl is powered by libcurl for all transfer-related features. See <span Class="emphasis">libcurl(3)</span> for details. </p><a name="URL"></a><h2 class="nroffsh">Url</h2>
+<p class="level0">The URL syntax is protocol-dependent. You find a detailed description in <a href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3986</a>. </p>
+<p class="level0">You can specify multiple URLs or parts of URLs by writing part sets within braces and quoting the URL as in: </p><pre class="level0">
+&nbsp; &quot;http://site.{one,two,three}.com&quot;
+</pre>
+
+<p class="level0">or you can get sequences of alphanumeric series by using [] as in: </p><pre class="level0">
+&nbsp; &quot;ftp://ftp.example.com/file[1-100].txt&quot;
+</pre>
+<pre class="level0">
+&nbsp; &quot;ftp://ftp.example.com/file[001-100].txt&quot;    (with leading zeros)
+</pre>
+<pre class="level0">
+&nbsp; &quot;ftp://ftp.example.com/file[a-z].txt&quot;
+</pre>
+
+<p class="level0">Nested sequences are not supported, but you can use several ones next to each other: </p><pre class="level0">
+&nbsp; &quot;http://example.com/archive[1996-1999]/vol[1-4]/part{a,b,c}.html&quot;
+</pre>
+
+<p class="level0">You can specify any amount of URLs on the command line. They will be fetched in a sequential manner in the specified order unless you use <a class="emphasis" href="#-Z">-Z, --parallel</a>. You can specify command line options and URLs mixed and in any order on the command line. </p>
+<p class="level0">You can specify a step counter for the ranges to get every Nth number or letter: </p><pre class="level0">
+&nbsp; &quot;http://example.com/file[1-100:10].txt&quot;
+</pre>
+<pre class="level0">
+&nbsp; &quot;http://example.com/file[a-z:2].txt&quot;
+</pre>
+
+<p class="level0">When using [] or {} sequences when invoked from a command line prompt, you probably have to put the full URL within double quotes to avoid the shell from interfering with it. This also goes for other characters treated special, like for example &#39;&amp;&#39;, &#39;?&#39; and &#39;*&#39;. </p>
+<p class="level0">Provide the IPv6 zone index in the URL with an escaped percentage sign and the interface name. Like in </p><pre class="level0">
+&nbsp; &quot;http://[fe80::3%25eth0]/&quot;
+</pre>
+
+<p class="level0">If you specify a URL without a protocol:// scheme, curl guesses what protocol you want. It then defaults to HTTP but assumes others based on often-used host name prefixes. For example, for host names starting with &quot;ftp.&quot; curl assumes you want FTP. </p>
+<p class="level0">curl attempts to re-use connections when doing multiple file transfers, so that getting many files from the same server do not use multiple connects / handshakes. This improves speed. Connection re-use can only be done for URLs specified for a single command line invocation and cannot be performed between separate curl runs. </p><a name="OUTPUT"></a><h2 class="nroffsh">Output</h2>
+<p class="level0">If not told otherwise, curl writes the received data to stdout. It can be instructed to instead save that data into a local file, using the <a class="emphasis" href="#-o">-o, --output</a> or --remote-name options. If curl is given multiple URLs to transfer on the command line, it similarly needs multiple options for where to save them. </p>
+<p class="level0">curl does not parse or otherwise &quot;understand&quot; the content it gets or writes as output. It does no encoding or decoding, unless explicitly asked to with dedicated command line options. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">curl supports numerous protocols, or put in URL terms: schemes. Your particular build may not support them all. </p>
+<p class="level0"><a name="DICT"></a><span class="nroffip">DICT</span> </p>
+<p class="level1">Lets you lookup words using online dictionaries. </p>
+<p class="level0"><a name="FILE"></a><span class="nroffip">FILE</span> </p>
+<p class="level1">Read or write local files. curl does not support accessing file:// URL remotely, but when running on Microsoft Windows using the native UNC approach will work. </p>
+<p class="level0"><a name="FTPS"></a><span class="nroffip">FTP(S)</span> </p>
+<p class="level1">curl supports the File Transfer Protocol with a lot of tweaks and levers. With or without using TLS. </p>
+<p class="level0"><a name="GOPHERS"></a><span class="nroffip">GOPHER(S)</span> </p>
+<p class="level1">Retrieve files. </p>
+<p class="level0"><a name="HTTPS"></a><span class="nroffip">HTTP(S)</span> </p>
+<p class="level1">curl supports HTTP with numerous options and variations. It can speak HTTP version 0.9, 1.0, 1.1, 2 and 3 depending on build options and the correct command line options. </p>
+<p class="level0"><a name="IMAPS"></a><span class="nroffip">IMAP(S)</span> </p>
+<p class="level1">Using the mail reading protocol, curl can &quot;download&quot; emails for you. With or without using TLS. </p>
+<p class="level0"><a name="LDAPS"></a><span class="nroffip">LDAP(S)</span> </p>
+<p class="level1">curl can do directory lookups for you, with or without TLS. </p>
+<p class="level0"><a name="MQTT"></a><span class="nroffip">MQTT</span> </p>
+<p class="level1">curl supports MQTT version 3. Downloading over MQTT equals &quot;subscribe&quot; to a topic while uploading/posting equals &quot;publish&quot; on a topic. MQTT over TLS is not supported (yet). </p>
+<p class="level0"><a name="POP3S"></a><span class="nroffip">POP3(S)</span> </p>
+<p class="level1">Downloading from a pop3 server means getting a mail. With or without using TLS. </p>
+<p class="level0"><a name="RTMPS"></a><span class="nroffip">RTMP(S)</span> </p>
+<p class="level1">The Realtime Messaging Protocol is primarily used to server streaming media and curl can download it. </p>
+<p class="level0"><a name="RTSP"></a><span class="nroffip">RTSP</span> </p>
+<p class="level1">curl supports RTSP 1.0 downloads. </p>
+<p class="level0"><a name="SCP"></a><span class="nroffip">SCP</span> </p>
+<p class="level1">curl supports SSH version 2 scp transfers. </p>
+<p class="level0"><a name="SFTP"></a><span class="nroffip">SFTP</span> </p>
+<p class="level1">curl supports SFTP (draft 5) done over SSH version 2. </p>
+<p class="level0"><a name="SMBS"></a><span class="nroffip">SMB(S)</span> </p>
+<p class="level1">curl supports SMB version 1 for upload and download. </p>
+<p class="level0"><a name="SMTPS"></a><span class="nroffip">SMTP(S)</span> </p>
+<p class="level1">Uploading contents to an SMTP server means sending an email. With or without TLS. </p>
+<p class="level0"><a name="TELNET"></a><span class="nroffip">TELNET</span> </p>
+<p class="level1">Telling curl to fetch a telnet URL starts an interactive session where it sends what it reads on stdin and outputs what the server sends it. </p>
+<p class="level0"><a name="TFTP"></a><span class="nroffip">TFTP</span> </p>
+<p class="level1">curl can do TFTP downloads and uploads. </p><a name="PROGRESS"></a><h2 class="nroffsh">Progress meter</h2>
+<p class="level0">curl normally displays a progress meter during operations, indicating the amount of transferred data, transfer speeds and estimated time left, etc. The progress meter displays the transfer rate in bytes per second. The suffixes (k, M, G, T, P) are 1024 based. For example 1k is 1024 bytes. 1M is 1048576 bytes. </p>
+<p class="level0">curl displays this data to the terminal by default, so if you invoke curl to do an operation and it is about to write data to the terminal, it <span Class="emphasis">disables</span> the progress meter as otherwise it would mess up the output mixing progress meter and response data. </p>
+<p class="level0">If you want a progress meter for HTTP POST or PUT requests, you need to redirect the response output to a file, using shell redirect (&gt;), <a class="emphasis" href="#-o">-o, --output</a> or similar. </p>
+<p class="level0">This does not apply to FTP upload as that operation does not spit out any response data to the terminal. </p>
+<p class="level0">If you prefer a progress &quot;bar&quot; instead of the regular meter, <a class="emphasis" href="#-hash">-&#35; , --progress-bar</a> is your friend. You can also disable the progress meter completely with the --silent option. </p><a name="VERSION"></a><h2 class="nroffsh">Version</h2>
+<p class="level0">This man page describes curl 8.2.0. If you use a later version, chances are this man page does not fully document it. If you use an earlier version, this document tries to include version information about which specific version that introduced changes. </p>
+<p class="level0">You can always learn which the latest curl version is by running </p><pre class="level0">
+curl https://curl.se/info
+</pre>
+<a name="OPTIONS"></a><h2 class="nroffsh">Options</h2>
+<p class="level0">Options start with one or two dashes. Many of the options require an additional value next to them. </p>
+<p class="level0">The short &quot;single-dash&quot; form of the options, -d for example, may be used with or without a space between it and its value, although a space is a recommended separator. The long &quot;double-dash&quot; form, --data for example, requires a space between it and its value. </p>
+<p class="level0">Short version options that do not need any additional values can be used immediately next to each other, like for example you can specify all the options -O, -L and -v at once as -OLv. </p>
+<p class="level0">In general, all boolean options are enabled with --<span Class="bold">option</span> and yet again disabled with --<span Class="bold">no-</span>option. That is, you use the same option name but prefix it with &quot;no-&quot;. However, in this list we mostly only list and show the --option version of them. </p>
+<p class="level0">When <a class="emphasis" href="#">-:, --next</a> is used, it resets the parser state and you start again with a clean option state, except for the options that are &quot;global&quot;. Global options will retain their values and meaning even after <a class="emphasis" href="#">-:, --next</a>. </p>
+<p class="level0">The following options are global: <a class="emphasis" href="#--fail-early">--fail-early</a>, <a class="emphasis" href="#-Z">-Z, --parallel</a> and <a class="emphasis" href="#-hash">-&#35; , --progress-bar</a>. </p>
+<p class="level0"><a name="-K"></a><span class="nroffip">-K, --config &lt;file&gt;</span> </p>
+<p class="level1">Specify a text file to read curl arguments from. The command line arguments found in the text file will be used as if they were provided on the command line. </p>
+<p class="level1">Options and their parameters must be specified on the same line in the file, separated by whitespace, colon, or the equals sign. Long option names can optionally be given in the config file without the initial double dashes and if so, the colon or equals characters can be used as separators. If the option is specified with one or two dashes, there can be no colon or equals character between the option and its parameter. </p>
+<p class="level1">If the parameter contains whitespace (or starts with : or =), the parameter must be enclosed within quotes. Within double quotes, the following escape sequences are available: &bsol; &bsol;&quot;, &bsol;t, &bsol;n, &bsol;r and &bsol;v. A backslash preceding any other letter is ignored. </p>
+<p class="level1">If the first column of a config line is a &#39;&#35;&#39; character, the rest of the line will be treated as a comment. </p>
+<p class="level1">Only write one option per physical line in the config file. </p>
+<p class="level1">Specify the filename to <a class="emphasis" href="#-K">-K, --config</a> as &#39;-&#39; to make curl read the file from stdin. </p>
+<p class="level1">Note that to be able to specify a URL in the config file, you need to specify it using the <a class="emphasis" href="#--url">--url</a> option, and not by simply writing the URL on its own line. So, it could look similar to this: </p>
+<p class="level1">url = &quot;<a href="https://curl.se/docs">https://curl.se/docs/</a>" </p><pre class="level1">
+&nbsp;&#35; --- Example file ---
+&nbsp;&#35; this is a comment
+&nbsp;url = &quot;example.com&quot;
+&nbsp;output = &quot;curlhere.html&quot;
+&nbsp;user-agent = &quot;superagent/1.0&quot;
+</pre>
+<pre class="level1">
+&nbsp;&#35; and fetch another URL too
+&nbsp;url = &quot;example.com/docs/manpage.html&quot;
+&nbsp;-O
+&nbsp;referer = &quot;http://nowhereatall.example.com/&quot;
+&nbsp;&#35; --- End of example file ---
+</pre>
+
+<p class="level1">When curl is invoked, it (unless --disable is used) checks for a default config file and uses it if found, even when <a class="emphasis" href="#-K">-K, --config</a> is used. The default config file is checked for in the following places in this order: </p>
+<p class="level1">1) &quot;$CURL_HOME/.curlrc&quot; </p>
+<p class="level1">2) &quot;$XDG_CONFIG_HOME/curlrc&quot; (Added in 7.73.0) </p>
+<p class="level1">3) &quot;$HOME/.curlrc&quot; </p>
+<p class="level1">4) Windows: &quot;%USERPROFILE%&bsol;.curlrc&quot; </p>
+<p class="level1">5) Windows: &quot;%APPDATA%&bsol;.curlrc&quot; </p>
+<p class="level1">6) Windows: &quot;%USERPROFILE%&bsol;Application Data&bsol;.curlrc&quot; </p>
+<p class="level1">7) Non-Windows: use getpwuid to find the home directory </p>
+<p class="level1">8) On Windows, if it finds no .curlrc file in the sequence described above, it checks for one in the same dir the curl executable is placed. </p>
+<p class="level1">On Windows two filenames are checked per location: .curlrc and _curlrc, preferring the former. Older versions on Windows checked for _curlrc only. </p>
+<p class="level1"><a class="emphasis" href="#-K">-K, --config</a> can be used several times in a command line </p>
+<p class="level1">Example: </p><pre class="level1">
+&nbsp;curl --config file.txt https://example.com
+</pre>
+
+<p class="level1">See also <span Class="emphasis">--disable</span>. </p>
+<p class="level0"><a name="-D"></a><span class="nroffip">-D, --dump-header &lt;filename&gt;</span> </p>
+<p class="level1">(HTTP FTP) Write the received protocol headers to the specified file. If no headers are received, the use of this option will create an empty file. </p>
+<p class="level1">When used in FTP, the FTP server response lines are considered being &quot;headers&quot; and thus are saved there. </p>
+<p class="level1">Having multiple transfers in one set of operations (i.e. the URLs in one <a class="emphasis" href="#">-:, --next</a> clause), will append them to the same file, separated by a blank line. </p>
+<p class="level1">If <a class="emphasis" href="#-D">-D, --dump-header</a> is provided several times, the last set value will be used. </p>
+<p class="level1">Example: </p><pre class="level1">
+&nbsp;curl --dump-header store.txt https://example.com
+</pre>
+
+<p class="level1">See also <a class="emphasis" href="#-o">-o, --output</a>. </p>
+<p class="level0"><a name="--fail-early"></a><span class="nroffip">--fail-early</span> </p>
+<p class="level1">Fail and exit on the first detected transfer error. </p>
+<p class="level1">When curl is used to do multiple transfers on the command line, it will attempt to operate on each given URL, one by one. By default, it will ignore errors if there are more URLs given and the last URL&#39;s success will determine the error code curl returns. So early failures will be &quot;hidden&quot; by subsequent successful transfers. </p>
+<p class="level1">Using this option, curl will instead return an error on the first transfer that fails, independent of the amount of URLs that are given on the command line. This way, no transfer failures go undetected by scripts and similar. </p>
+<p class="level1">This option does not imply --fail, which causes transfers to fail due to the server&#39;s HTTP status code. You can combine the two options, however note --fail is not global and is therefore contained by <a class="emphasis" href="#">-:, --next</a>. </p>
+<p class="level1">This option is global and does not need to be specified for each use of --next. </p>
+<p class="level1">Providing <a class="emphasis" href="#--fail-early">--fail-early</a> multiple times has no extra effect. Disable it again with --no-fail-early. </p>
+<p class="level1">Example: </p><pre class="level1">
+&nbsp;curl --fail-early https://example.com https://two.example
+</pre>
+
+<p class="level1">See also <span Class="emphasis">--fail</span> and <span Class="emphasis">--fail-with-body</span>. Added in 7.52.0. </p>
+<p class="level0"><a name="-P"></a><span class="nroffip">-P, --ftp-port &lt;address&gt;</span> </p>
+<p class="level1">(FTP) Reverses the default initiator/listener roles when connecting with FTP. This option makes curl use active mode. curl then tells the server to connect back to the client&#39;s specified address and port, while passive mode asks the server to setup an IP address and port for it to connect to. &lt;address&gt; should be one of: </p>
+<p class="level1"><a name="interface"></a><span class="nroffip">interface</span> </p>
+<p class="level2">e.g. &quot;eth0&quot; to specify which interface&#39;s IP address you want to use (Unix only) </p>
+<p class="level1"><a name="IP"></a><span class="nroffip">IP address</span> </p>
+<p class="level2">e.g. &quot;192.168.10.1&quot; to specify the exact IP address </p>
+<p class="level1"><a name="host"></a><span class="nroffip">host name</span> </p>
+<p class="level2">e.g. &quot;my.host.domain&quot; to specify the machine </p>
+<p class="level1"><a name="-"></a><span class="nroffip">-</span> </p>
+<p class="level2">make curl pick the same IP address that is already used for the control connection </p>
+<p class="level0"><a name=""></a><span class="nroffip"></span> </p>
+<p class="level1">Disable the use of PORT with --ftp-pasv. Disable the attempt to use the EPRT command instead of PORT by using --disable-eprt. EPRT is really PORT++. </p>
+<p class="level1">You can also append &quot;:[start]-[end]&quot; to the right of the address, to tell curl what TCP port range to use. That means you specify a port range, from a lower to a higher number. A single number works as well, but do note that it increases the risk of failure since the port may not be available. </p>
+<p class="level1">If <a class="emphasis" href="#-P">-P, --ftp-port</a> is provided several times, the last set value will be used. </p>
+<p class="level1">Examples: </p><pre class="level1">
+&nbsp;curl -P - ftp:/example.com
+&nbsp;curl -P eth0 ftp:/example.com
+&nbsp;curl -P 192.168.0.2 ftp:/example.com
+</pre>
+
+<p class="level1">See also <span Class="emphasis">--ftp-pasv</span> and <span Class="emphasis">--disable-eprt</span>. </p>
+<p class="level0"><a name="-colon"></a><span class="nroffip">-:, --next</span> </p>
+<p class="level1">Tells curl to use a separate operation for the following URL and associated options. This allows you to send several URL requests, each with their own specific options, for example, such as different user names or custom requests for each. </p>
+<p class="level1"><a class="emphasis" href="#">-:, --next</a> will reset all local options and only global ones will have their values survive over to the operation following the <a class="emphasis" href="#">-:, --next</a> instruction. Global options include --verbose, --trace, --trace-ascii and <a class="emphasis" href="#--fail-early">--fail-early</a>. </p>
+<p class="level1">For example, you can do both a GET and a POST in a single command line: </p><pre class="level1">
+&nbsp;curl www1.example.com --next -d postthis www2.example.com
+</pre>
+
+<p class="level1"><a class="emphasis" href="#">-:, --next</a> can be used several times in a command line </p>
+<p class="level1">Examples: </p><pre class="level1">
+&nbsp;curl https://example.com --next -d postthis www2.example.com
+&nbsp;curl -I https://example.com --next https://example.net/
+</pre>
+
+<p class="level1">See also <a class="emphasis" href="#-Z">-Z, --parallel</a> and <a class="emphasis" href="#-K">-K, --config</a>. Added in 7.36.0. </p>
+<p class="level0"><a name="-N"></a><span class="nroffip">-N, --no-buffer</span> </p>
+<p class="level1">Disables the buffering of the output stream. In normal work situations, curl will use a standard buffered output stream that will have the effect that it will output the data in chunks, not necessarily exactly when the data arrives. Using this option will disable that buffering. </p>
+<p class="level1">Providing <a class="emphasis" href="#-N">-N, --no-buffer</a> multiple times has no extra effect. Disable it again with --buffer. </p>
+<p class="level1">Example: </p><pre class="level1">
+&nbsp;curl --no-buffer https://example.com
+</pre>
+
+<p class="level1">See also <a class="emphasis" href="#-hash">-&#35; , --progress-bar</a>. </p>
+<p class="level0"><a name="--output-dir"></a><span class="nroffip">--output-dir &lt;dir&gt;</span> </p>
+<p class="level1">This option specifies the directory in which files should be stored, when --remote-name or <a class="emphasis" href="#-o">-o, --output</a> are used. </p>
+<p class="level1">The given output directory is used for all URLs and output options on the command line, up until the first <a class="emphasis" href="#">-:, --next</a>. </p>
+<p class="level1">If the specified target directory does not exist, the operation will fail unless --create-dirs is also used. </p>
+<p class="level1">If <a class="emphasis" href="#--output-dir">--output-dir</a> is provided several times, the last set value will be used. </p>
+<p class="level1">Example: </p><pre class="level1">
+&nbsp;curl --output-dir &quot;tmp&quot; -O https://example.com
+</pre>
+
+<p class="level1">See also <span Class="emphasis">--remote-name</span> and <span Class="emphasis">--remote-header-name</span>. Added in 7.73.0. </p>
+<p class="level0"><a name="-o"></a><span class="nroffip">-o, --output &lt;file&gt;</span> </p>
+<p class="level1">Write output to &lt;file&gt; instead of stdout. If you are using {} or [] to fetch multiple documents, you should quote the URL and you can use &#39;&#35;&#39; followed by a number in the &lt;file&gt; specifier. That variable will be replaced with the current string for the URL being fetched. Like in: </p><pre class="level1">
+&nbsp;curl &quot;http://{one,two}.example.com&quot; -o &quot;file_&#35;1.txt&quot;
+</pre>
+
+<p class="level1">or use several variables like: </p><pre class="level1">
+&nbsp;curl &quot;http://{site,host}.host[1-5].com&quot; -o &quot;&#35;1_&#35;2&quot;
+</pre>
+
+<p class="level1">You may use this option as many times as the number of URLs you have. For example, if you specify two URLs on the same command line, you can use it like this: </p><pre class="level1">
+&nbsp; curl -o aa example.com -o bb example.net
+</pre>
+
+<p class="level1">and the order of the -o options and the URLs does not matter, just that the first -o is for the first URL and so on, so the above command line can also be written as </p><pre class="level1">
+&nbsp; curl example.com example.net -o aa -o bb
+</pre>
+
+<p class="level1">See also the --create-dirs option to create the local directories dynamically. Specifying the output as &#39;-&#39; (a single dash) will force the output to be done to stdout. </p>
+<p class="level1">To suppress response bodies, you can redirect output to /dev/null: </p><pre class="level1">
+&nbsp; curl example.com -o /dev/null
+</pre>
+
+<p class="level1">Or for Windows use nul: </p><pre class="level1">
+&nbsp; curl example.com -o nul
+</pre>
+
+<p class="level1"><a class="emphasis" href="#-o">-o, --output</a> can be used several times in a command line </p>
+<p class="level1">Examples: </p><pre class="level1">
+&nbsp;curl -o file https://example.com
+&nbsp;curl &quot;http://{one,two}.example.com&quot; -o &quot;file_&#35;1.txt&quot;
+&nbsp;curl &quot;http://{site,host}.host[1-5].com&quot; -o &quot;&#35;1_&#35;2&quot;
+&nbsp;curl -o file https://example.com -o file2 https://example.net
+</pre>
+
+<p class="level1">See also <span Class="emphasis">--remote-name</span>, <span Class="emphasis">--remote-name-all</span> and <span Class="emphasis">--remote-header-name</span>. </p>
+<p class="level0"><a name="--parallel-max"></a><span class="nroffip">--parallel-max &lt;num&gt;</span> </p>
+<p class="level1">When asked to do parallel transfers, using <a class="emphasis" href="#-Z">-Z, --parallel</a>, this option controls the maximum amount of transfers to do simultaneously. </p>
+<p class="level1">This option is global and does not need to be specified for each use of <a class="emphasis" href="#">-:, --next</a>. </p>
+<p class="level1">The default is 50. </p>
+<p class="level1">If <a class="emphasis" href="#--parallel-max">--parallel-max</a> is provided several times, the last set value will be used. </p>
+<p class="level1">Example: </p><pre class="level1">
+&nbsp;curl --parallel-max 100 -Z https://example.com ftp://example.com/
+</pre>
+
+<p class="level1">See also <a class="emphasis" href="#-Z">-Z, --parallel</a>. Added in 7.66.0. </p>
+<p class="level0"><a name="-Z"></a><span class="nroffip">-Z, --parallel</span> </p>
+<p class="level1">Makes curl perform its transfers in parallel as compared to the regular serial manner. </p>
+<p class="level1">This option is global and does not need to be specified for each use of --next. </p>
+<p class="level1">Providing <a class="emphasis" href="#-Z">-Z, --parallel</a> multiple times has no extra effect. Disable it again with --no-parallel. </p>
+<p class="level1">Example: </p><pre class="level1">
+&nbsp;curl --parallel https://example.com -o file1 https://example.com -o file2
+</pre>
+
+<p class="level1">See also <a class="emphasis" href="#">-:, --next</a> and <span Class="emphasis">--verbose</span>. Added in 7.66.0. </p>
+<p class="level0"><a name="-hash"></a><span class="nroffip">-&#35;, --progress-bar</span> </p>
+<p class="level1">Make curl display transfer progress as a simple progress bar instead of the standard, more informational, meter. </p>
+<p class="level1">This progress bar draws a single line of &#39;&#35;&#39; characters across the screen and shows a percentage if the transfer size is known. For transfers without a known size, there will be space ship (-=o=-) that moves back and forth but only while data is being transferred, with a set of flying hash sign symbols on top. </p>
+<p class="level1">This option is global and does not need to be specified for each use of --next. </p>
+<p class="level1">Providing <a class="emphasis" href="#-hash">-&#35; , --progress-bar</a> multiple times has no extra effect. Disable it again with --no-progress-bar. </p>
+<p class="level1">Example: </p><pre class="level1">
+&nbsp;curl -&#35; -O https://example.com
+</pre>
+
+<p class="level1">See also <span Class="emphasis">--styled-output</span>. </p>
+<p class="level0"><a name="--proto"></a><span class="nroffip">--proto &lt;protocols&gt;</span> </p>
+<p class="level1">Tells curl to limit what protocols it may use for transfers. Protocols are evaluated left to right, are comma separated, and are each a protocol name or &apos;all&#39;, optionally prefixed by zero or more modifiers. Available modifiers are: </p>
+<p class="level2"><a class="bold" href="">+</a> Permit this protocol in addition to protocols already permitted (this is the default if no modifier is used). </p>
+<p class="level2"><a class="bold" href="#">-</a> Deny this protocol, removing it from the list of protocols already permitted. </p>
+<p class="level2"><a class="bold" href="">=</a> Permit only this protocol (ignoring the list already permitted), though subject to later modification by subsequent entries in the comma separated list. </p>
+<p class="level0"><a name=""></a><span class="nroffip"></span> </p>
+<p class="level1">For example: </p>
+<p class="level2"><a class="bold" href="#--proto">--proto -ftps</a> uses the default protocols, but disables ftps </p>
+<p class="level2"><a class="bold" href="#--proto">--proto -all,https,+http</a> only enables http and https </p>
+<p class="level2"><a class="bold" href="#--proto">--proto =http,https</a> also only enables http and https </p>
+<p class="level0"><a name=""></a><span class="nroffip"></span> </p>
+<p class="level1">Unknown and disabled protocols produce a warning. This allows scripts to safely rely on being able to disable potentially dangerous protocols, without relying upon support for that protocol being built into curl to avoid an error. </p>
+<p class="level1">This option can be used multiple times, in which case the effect is the same as concatenating the protocols into one instance of the option. </p>
+<p class="level1">If <a class="emphasis" href="#--proto">--proto</a> is provided several times, the last set value will be used. </p>
+<p class="level1">Example: </p><pre class="level1">
+&nbsp;curl --proto =http,https,sftp https://example.com
+</pre>
+
+<p class="level1">See also <span Class="emphasis">--proto-redir</span> and <span Class="emphasis">--proto-default</span>. </p>
+<p class="level0"><a name="-x"></a><span class="nroffip">-x, --proxy [protocol://]host[:port]</span> </p>
+<p class="level1">Use the specified proxy. </p>
+<p class="level1">The proxy string can be specified with a protocol:// prefix. No protocol specified or http:// will be treated as HTTP proxy. Use socks4://, socks4a://, socks5:// or socks5h:// to request a specific SOCKS version to be used. </p>
+<p class="level1">Unix domain sockets are supported for socks proxy. Set localhost for the host part. e.g. socks5h://localhost/path/to/socket.sock </p>
+<p class="level1">HTTPS proxy support via https:// protocol prefix was added in 7.52.0 for OpenSSL, GnuTLS and NSS. Since 7.87.0, it also works for BearSSL, mbedTLS, rustls, Schannel, Secure Transport and wolfSSL. </p>
+<p class="level1">Unrecognized and unsupported proxy protocols cause an error since 7.52.0. Prior versions may ignore the protocol and use http:// instead. </p>
+<p class="level1">If the port number is not specified in the proxy string, it is assumed to be 1080. </p>
+<p class="level1">This option overrides existing environment variables that set the proxy to use. If there&#39;s an environment variable setting a proxy, you can set proxy to &quot;&quot; to override it. </p>
+<p class="level1">All operations that are performed over an HTTP proxy will transparently be converted to HTTP. It means that certain protocol specific operations might not be available. This is not the case if you can tunnel through the proxy, as one with the --proxytunnel option. </p>
+<p class="level1">User and password that might be provided in the proxy string are URL decoded by curl. This allows you to pass in special characters such as @ by using %40 or pass in a colon with %3a. </p>
+<p class="level1">The proxy host can be specified the same way as the proxy environment variables, including the protocol prefix (<a href="javascript:void(0)">http://)</a> and the embedded user + password. </p>
+<p class="level1">When a proxy is used, the active FTP mode as set with <a class="emphasis" href="#-P">-P, --ftp-port</a>, cannot be used. </p>
+<p class="level1">If <a class="emphasis" href="#-x">-x, --proxy</a> is provided several times, the last set value will be used. </p>
+<p class="level1">Example: </p><pre class="level1">
+&nbsp;curl --proxy http://proxy.example https://example.com
+</pre>
+
+<p class="level1">See also <span Class="emphasis">--socks5</span> and <span Class="emphasis">--proxy-basic</span>. </p>
+<p class="level0"><a name="--url"></a><span class="nroffip">--url &lt;url&gt;</span> </p>
+<p class="level1">Specify a URL to fetch. This option is mostly handy when you want to specify URL(s) in a config file. </p>
+<p class="level1">If the given URL is missing a scheme name (such as &quot;<a href="javascript:void(0)">http://</a>" or &quot;<a href="javascript:void(0)">ftp://</a>" etc) then curl will make a guess based on the host. If the outermost sub-domain name matches DICT, FTP, IMAP, LDAP, POP3 or SMTP then that protocol will be used, otherwise HTTP will be used. Since 7.45.0 guessing can be disabled by setting a default protocol, see --proto-default for details. </p>
+<p class="level1">To control where this URL is written, use the <a class="emphasis" href="#-o">-o, --output</a> or the --remote-name options. </p>
+<p class="level1"><span Class="bold">WARNING</span>: On Windows, particular file:// accesses can be converted to network accesses by the operating system. Beware! </p>
+<p class="level1"><a class="emphasis" href="#--url">--url</a> can be used several times in a command line </p>
+<p class="level1">Example: </p><pre class="level1">
+&nbsp;curl --url https://example.com
+</pre>
+
+<p class="level1">See also <a class="emphasis" href="#">-:, --next</a> and <a class="emphasis" href="#-K">-K, --config</a>. </p><a name="FILES"></a><h2 class="nroffsh">Files</h2>
+<p class="level0"><span Class="emphasis">~/.curlrc</span> </p>
+<p class="level1">Default config file, see <a class="emphasis" href="#-K">-K, --config</a> for details. </p><a name="ENVIRONMENT"></a><h2 class="nroffsh">Environment</h2>
+<p class="level0">The environment variables can be specified in lower case or upper case. The lower case version has precedence. http_proxy is an exception as it is only available in lower case. </p>
+<p class="level0">Using an environment variable to set the proxy has the same effect as using the <a class="emphasis" href="#-x">-x, --proxy</a> option. </p>
+<p class="level0"><a name="httpproxy"></a><span class="nroffip">http_proxy [protocol://]&lt;host&gt;[:port]</span> </p>
+<p class="level1">Sets the proxy server to use for HTTP. </p>
+<p class="level0"><a name="HTTPSPROXY"></a><span class="nroffip">HTTPS_PROXY [protocol://]&lt;host&gt;[:port]</span> </p>
+<p class="level1">Sets the proxy server to use for HTTPS. </p>
+<p class="level0"><a name="url-protocolPROXY"></a><span class="nroffip">[url-protocol]_PROXY [protocol://]&lt;host&gt;[:port]</span> </p>
+<p class="level1">Sets the proxy server to use for [url-protocol], where the protocol is a protocol that curl supports and as specified in a URL. FTP, FTPS, POP3, IMAP, SMTP, LDAP, etc. </p>
+<p class="level0"><a name="ALLPROXY"></a><span class="nroffip">ALL_PROXY [protocol://]&lt;host&gt;[:port]</span> </p>
+<p class="level1">Sets the proxy server to use if no protocol-specific proxy is set. </p>
+<p class="level0"><a name="NOPROXY"></a><span class="nroffip">NO_PROXY &lt;comma-separated list of hosts/domains&gt;</span> </p>
+<p class="level1">list of host names that should not go through any proxy. If set to an asterisk &apos;*&#39; only, it matches all hosts. Each name in this list is matched as either a domain name which contains the hostname, or the hostname itself. </p>
+<p class="level1">This environment variable disables use of the proxy even when specified with the <a class="emphasis" href="#-x">-x, --proxy</a> option. That is <span Class="bold">NO_PROXY=direct.example.com curl -x <a href="http://proxy.example.com">http://proxy.example.com</a></span> <span Class="bold"><a href="http://direct.example.com">http://direct.example.com</a></span> accesses the target URL directly, and <span Class="bold">NO_PROXY=direct.example.com curl -x <a href="http://proxy.example.com">http://proxy.example.com</a></span> <span Class="bold"><a href="http://somewhere.example.com">http://somewhere.example.com</a></span> accesses the target URL through the proxy. </p>
+<p class="level1">The list of host names can also be include numerical IP addresses, and IPv6 versions should then be given without enclosing brackets. </p>
+<p class="level1">Since 7.86.0, IP addresses can be specified using CIDR notation: an appended slash and number specifies the number of &quot;network bits&quot; out of the address to use in the comparison. For example &quot;192.168.0.0/16&quot; would match all addresses starting with &quot;192.168&quot;. </p>
+<p class="level0"><a name="APPDATA"></a><span class="nroffip">APPDATA &lt;dir&gt;</span> </p>
+<p class="level1">On Windows, this variable is used when trying to find the home directory. If the primary home variable are all unset. </p>
+<p class="level0"><a name="COLUMNS"></a><span class="nroffip">COLUMNS &lt;terminal width&gt;</span> </p>
+<p class="level1">If set, the specified number of characters will be used as the terminal width when the alternative progress-bar is shown. If not set, curl will try to figure it out using other ways. </p>
+<p class="level0"><a name="CURLCABUNDLE"></a><span class="nroffip">CURL_CA_BUNDLE &lt;file&gt;</span> </p>
+<p class="level1">If set, will be used as the --cacert value. </p>
+<p class="level0"><a name="CURLHOME"></a><span class="nroffip">CURL_HOME &lt;dir&gt;</span> </p>
+<p class="level1">If set, is the first variable curl checks when trying to find its home directory. If not set, it continues to check <a class="emphasis" href="#XDGCONFIGHOME">XDG_CONFIG_HOME</a> </p>
+<p class="level0"><a name="CURLSSLBACKEND"></a><span class="nroffip">CURL_SSL_BACKEND &lt;TLS backend&gt;</span> </p>
+<p class="level1">If curl was built with support for &quot;MultiSSL&quot;, meaning that it has built-in support for more than one TLS backend, this environment variable can be set to the case insensitive name of the particular backend to use when curl is invoked. Setting a name that is not a built-in alternative will make curl stay with the default. </p>
+<p class="level1">SSL backend names (case-insensitive): bearssl, gnutls, gskit, mbedtls, nss, openssl, rustls, schannel, secure-transport, wolfssl </p>
+<p class="level0"><a name="HOME"></a><span class="nroffip">HOME &lt;dir&gt;</span> </p>
+<p class="level1">If set, this is used to find the home directory when that is needed. Like when looking for the default .curlrc. <a class="emphasis" href="#CURLHOME">CURL_HOME</a> and <a class="emphasis" href="#XDGCONFIGHOME">XDG_CONFIG_HOME</a> have preference. </p>
+<p class="level0"><a name="QLOGDIR"></a><span class="nroffip">QLOGDIR &lt;directory name&gt;</span> </p>
+<p class="level1">If curl was built with HTTP/3 support, setting this environment variable to a local directory will make curl produce qlogs in that directory, using file names named after the destination connection id (in hex). Do note that these files can become rather large. Works with both QUIC backends. </p>
+<p class="level0"><a name="SHELL"></a><span class="nroffip">SHELL</span> </p>
+<p class="level1">Used on VMS when trying to detect if using a DCL or a &quot;unix&quot; shell. </p>
+<p class="level0"><a name="SSLCERTDIR"></a><span class="nroffip">SSL_CERT_DIR &lt;dir&gt;</span> </p>
+<p class="level1">If set, will be used as the --capath value. </p>
+<p class="level0"><a name="SSLCERTFILE"></a><span class="nroffip">SSL_CERT_FILE &lt;path&gt;</span> </p>
+<p class="level1">If set, will be used as the --cacert value. </p>
+<p class="level0"><a name="SSLKEYLOGFILE"></a><span class="nroffip">SSLKEYLOGFILE &lt;file name&gt;</span> </p>
+<p class="level1">If you set this environment variable to a file name, curl will store TLS secrets from its connections in that file when invoked to enable you to analyze the TLS traffic in real time using network analyzing tools such as Wireshark. This works with the following TLS backends: OpenSSL, libressl, BoringSSL, GnuTLS, NSS and wolfSSL. </p>
+<p class="level0"><a name="USERPROFILE"></a><span class="nroffip">USERPROFILE &lt;dir&gt;</span> </p>
+<p class="level1">On Windows, this variable is used when trying to find the home directory. If the other, primary, variable are all unset. If set, curl will use the path &quot;$USERPROFILE&bsol;Application Data&quot;. </p>
+<p class="level0"><a name="XDGCONFIGHOME"></a><span class="nroffip">XDG_CONFIG_HOME &lt;dir&gt;</span> </p>
+<p class="level1">If <a class="emphasis" href="#CURLHOME">CURL_HOME</a> is not set, this variable is checked when looking for a default .curlrc file. </p><a name="PROXY"></a><h2 class="nroffsh">Proxy protocol prefixes</h2>
+<p class="level0">The proxy string may be specified with a protocol:// prefix to specify alternative proxy protocols. </p>
+<p class="level0">If no protocol is specified in the proxy string or if the string does not match a supported one, the proxy will be treated as an HTTP proxy. </p>
+<p class="level0">The supported proxy protocol prefixes are as follows: </p>
+<p class="level0"><a name="http"></a><span class="nroffip">http://</span> </p>
+<p class="level1">Makes it use it as an HTTP proxy. The default if no scheme prefix is used. </p>
+<p class="level0"><a name="https"></a><span class="nroffip">https://</span> </p>
+<p class="level1">Makes it treated as an <a class="bold" href="#HTTPS">HTTPS</a> proxy. </p>
+<p class="level0"><a name="socks4"></a><span class="nroffip">socks4://</span> </p>
+<p class="level1">Makes it the equivalent of --socks4 </p>
+<p class="level0"><a name="socks4a"></a><span class="nroffip">socks4a://</span> </p>
+<p class="level1">Makes it the equivalent of --socks4a </p>
+<p class="level0"><a name="socks5"></a><span class="nroffip">socks5://</span> </p>
+<p class="level1">Makes it the equivalent of --socks5 </p>
+<p class="level0"><a name="socks5h"></a><span class="nroffip">socks5h://</span> </p>
+<p class="level1">Makes it the equivalent of --socks5-hostname </p><a name="EXIT"></a><h2 class="nroffsh">Exit codes</h2>
+<p class="level0">There are a bunch of different error codes and their corresponding error messages that may appear under error conditions. At the time of this writing, the exit codes are: </p>
+<p class="level0"><a name="0"></a><span class="nroffip">0</span> </p>
+<p class="level1">Success. The operation completed successfully according to the instructions. </p>
+<p class="level0"><a name="1"></a><span class="nroffip">1</span> </p>
+<p class="level1">Unsupported protocol. This build of curl has no support for this protocol. </p>
+<p class="level0"><a name="2"></a><span class="nroffip">2</span> </p>
+<p class="level1">Failed to initialize. </p>
+<p class="level0"><a name="3"></a><span class="nroffip">3</span> </p>
+<p class="level1">URL malformed. The syntax was not correct. </p>
+<p class="level0"><a name="4"></a><span class="nroffip">4</span> </p>
+<p class="level1">A feature or option that was needed to perform the desired request was not enabled or was explicitly disabled at build-time. To make curl able to do this, you probably need another build of libcurl. </p>
+<p class="level0"><a name="5"></a><span class="nroffip">5</span> </p>
+<p class="level1">Could not resolve proxy. The given proxy host could not be resolved. </p>
+<p class="level0"><a name="6"></a><span class="nroffip">6</span> </p>
+<p class="level1">Could not resolve host. The given remote host could not be resolved. </p>
+<p class="level0"><a name="7"></a><span class="nroffip">7</span> </p>
+<p class="level1">Failed to connect to host. </p>
+<p class="level0"><a name="8"></a><span class="nroffip">8</span> </p>
+<p class="level1">Weird server reply. The server sent data curl could not parse. </p>
+<p class="level0"><a name="9"></a><span class="nroffip">9</span> </p>
+<p class="level1">FTP access denied. The server denied login or denied access to the particular resource or directory you wanted to reach. Most often you tried to change to a directory that does not exist on the server. </p>
+<p class="level0"><a name="10"></a><span class="nroffip">10</span> </p>
+<p class="level1">FTP accept failed. While waiting for the server to connect back when an active FTP session is used, an error code was sent over the control connection or similar. </p>
+<p class="level0"><a name="11"></a><span class="nroffip">11</span> </p>
+<p class="level1">FTP weird PASS reply. Curl could not parse the reply sent to the PASS request. </p>
+<p class="level0"><a name="12"></a><span class="nroffip">12</span> </p>
+<p class="level1">During an active FTP session while waiting for the server to connect back to curl, the timeout expired. </p>
+<p class="level0"><a name="13"></a><span class="nroffip">13</span> </p>
+<p class="level1">FTP weird PASV reply, Curl could not parse the reply sent to the PASV request. </p>
+<p class="level0"><a name="14"></a><span class="nroffip">14</span> </p>
+<p class="level1">FTP weird 227 format. Curl could not parse the 227-line the server sent. </p>
+<p class="level0"><a name="15"></a><span class="nroffip">15</span> </p>
+<p class="level1">FTP cannot use host. Could not resolve the host IP we got in the 227-line. </p>
+<p class="level0"><a name="16"></a><span class="nroffip">16</span> </p>
+<p class="level1">HTTP/2 error. A problem was detected in the HTTP2 framing layer. This is somewhat generic and can be one out of several problems, see the error message for details. </p>
+<p class="level0"><a name="17"></a><span class="nroffip">17</span> </p>
+<p class="level1">FTP could not set binary. Could not change transfer method to binary. </p>
+<p class="level0"><a name="18"></a><span class="nroffip">18</span> </p>
+<p class="level1">Partial file. Only a part of the file was transferred. </p>
+<p class="level0"><a name="19"></a><span class="nroffip">19</span> </p>
+<p class="level1">FTP could not download/access the given file, the RETR (or similar) command failed. </p>
+<p class="level0"><a name="21"></a><span class="nroffip">21</span> </p>
+<p class="level1">FTP quote error. A quote command returned error from the server. </p>
+<p class="level0"><a name="22"></a><span class="nroffip">22</span> </p>
+<p class="level1">HTTP page not retrieved. The requested URL was not found or returned another error with the HTTP error code being 400 or above. This return code only appears if --fail is used. </p>
+<p class="level0"><a name="23"></a><span class="nroffip">23</span> </p>
+<p class="level1">Write error. Curl could not write data to a local filesystem or similar. </p>
+<p class="level0"><a name="25"></a><span class="nroffip">25</span> </p>
+<p class="level1">FTP could not STOR file. The server denied the STOR operation, used for FTP uploading. </p>
+<p class="level0"><a name="26"></a><span class="nroffip">26</span> </p>
+<p class="level1">Read error. Various reading problems. </p>
+<p class="level0"><a name="27"></a><span class="nroffip">27</span> </p>
+<p class="level1">Out of memory. A memory allocation request failed. </p>
+<p class="level0"><a name="28"></a><span class="nroffip">28</span> </p>
+<p class="level1">Operation timeout. The specified time-out period was reached according to the conditions. </p>
+<p class="level0"><a name="30"></a><span class="nroffip">30</span> </p>
+<p class="level1">FTP PORT failed. The PORT command failed. Not all FTP servers support the PORT command, try doing a transfer using PASV instead! </p>
+<p class="level0"><a name="31"></a><span class="nroffip">31</span> </p>
+<p class="level1">FTP could not use REST. The REST command failed. This command is used for resumed FTP transfers. </p>
+<p class="level0"><a name="33"></a><span class="nroffip">33</span> </p>
+<p class="level1">HTTP range error. The range &quot;command&quot; did not work. </p>
+<p class="level0"><a name="34"></a><span class="nroffip">34</span> </p>
+<p class="level1">HTTP post error. Internal post-request generation error. </p>
+<p class="level0"><a name="35"></a><span class="nroffip">35</span> </p>
+<p class="level1">SSL connect error. The SSL handshaking failed. </p>
+<p class="level0"><a name="36"></a><span class="nroffip">36</span> </p>
+<p class="level1">Bad download resume. Could not continue an earlier aborted download. </p>
+<p class="level0"><a name="37"></a><span class="nroffip">37</span> </p>
+<p class="level1">FILE could not read file. Failed to open the file. Permissions? </p>
+<p class="level0"><a name="38"></a><span class="nroffip">38</span> </p>
+<p class="level1">LDAP cannot bind. LDAP bind operation failed. </p>
+<p class="level0"><a name="39"></a><span class="nroffip">39</span> </p>
+<p class="level1">LDAP search failed. </p>
+<p class="level0"><a name="41"></a><span class="nroffip">41</span> </p>
+<p class="level1">Function not found. A required LDAP function was not found. </p>
+<p class="level0"><a name="42"></a><span class="nroffip">42</span> </p>
+<p class="level1">Aborted by callback. An application told curl to abort the operation. </p>
+<p class="level0"><a name="43"></a><span class="nroffip">43</span> </p>
+<p class="level1">Internal error. A function was called with a bad parameter. </p>
+<p class="level0"><a name="45"></a><span class="nroffip">45</span> </p>
+<p class="level1">Interface error. A specified outgoing interface could not be used. </p>
+<p class="level0"><a name="47"></a><span class="nroffip">47</span> </p>
+<p class="level1">Too many redirects. When following redirects, curl hit the maximum amount. </p>
+<p class="level0"><a name="48"></a><span class="nroffip">48</span> </p>
+<p class="level1">Unknown option specified to libcurl. This indicates that you passed a weird option to curl that was passed on to libcurl and rejected. Read up in the manual! </p>
+<p class="level0"><a name="49"></a><span class="nroffip">49</span> </p>
+<p class="level1">Malformed telnet option. </p>
+<p class="level0"><a name="52"></a><span class="nroffip">52</span> </p>
+<p class="level1">The server did not reply anything, which here is considered an error. </p>
+<p class="level0"><a name="53"></a><span class="nroffip">53</span> </p>
+<p class="level1">SSL crypto engine not found. </p>
+<p class="level0"><a name="54"></a><span class="nroffip">54</span> </p>
+<p class="level1">Cannot set SSL crypto engine as default. </p>
+<p class="level0"><a name="55"></a><span class="nroffip">55</span> </p>
+<p class="level1">Failed sending network data. </p>
+<p class="level0"><a name="56"></a><span class="nroffip">56</span> </p>
+<p class="level1">Failure in receiving network data. </p>
+<p class="level0"><a name="58"></a><span class="nroffip">58</span> </p>
+<p class="level1">Problem with the local certificate. </p>
+<p class="level0"><a name="59"></a><span class="nroffip">59</span> </p>
+<p class="level1">Could not use specified SSL cipher. </p>
+<p class="level0"><a name="60"></a><span class="nroffip">60</span> </p>
+<p class="level1">Peer certificate cannot be authenticated with known CA certificates. </p>
+<p class="level0"><a name="61"></a><span class="nroffip">61</span> </p>
+<p class="level1">Unrecognized transfer encoding. </p>
+<p class="level0"><a name="63"></a><span class="nroffip">63</span> </p>
+<p class="level1">Maximum file size exceeded. </p>
+<p class="level0"><a name="64"></a><span class="nroffip">64</span> </p>
+<p class="level1">Requested FTP SSL level failed. </p>
+<p class="level0"><a name="65"></a><span class="nroffip">65</span> </p>
+<p class="level1">Sending the data requires a rewind that failed. </p>
+<p class="level0"><a name="66"></a><span class="nroffip">66</span> </p>
+<p class="level1">Failed to initialise SSL Engine. </p>
+<p class="level0"><a name="67"></a><span class="nroffip">67</span> </p>
+<p class="level1">The user name, password, or similar was not accepted and curl failed to log in. </p>
+<p class="level0"><a name="68"></a><span class="nroffip">68</span> </p>
+<p class="level1">File not found on TFTP server. </p>
+<p class="level0"><a name="69"></a><span class="nroffip">69</span> </p>
+<p class="level1">Permission problem on TFTP server. </p>
+<p class="level0"><a name="70"></a><span class="nroffip">70</span> </p>
+<p class="level1">Out of disk space on TFTP server. </p>
+<p class="level0"><a name="71"></a><span class="nroffip">71</span> </p>
+<p class="level1">Illegal TFTP operation. </p>
+<p class="level0"><a name="72"></a><span class="nroffip">72</span> </p>
+<p class="level1">Unknown TFTP transfer ID. </p>
+<p class="level0"><a name="73"></a><span class="nroffip">73</span> </p>
+<p class="level1">File already exists (TFTP). </p>
+<p class="level0"><a name="74"></a><span class="nroffip">74</span> </p>
+<p class="level1">No such user (TFTP). </p>
+<p class="level0"><a name="77"></a><span class="nroffip">77</span> </p>
+<p class="level1">Problem reading the SSL CA cert (path? access rights?). </p>
+<p class="level0"><a name="78"></a><span class="nroffip">78</span> </p>
+<p class="level1">The resource referenced in the URL does not exist. </p>
+<p class="level0"><a name="79"></a><span class="nroffip">79</span> </p>
+<p class="level1">An unspecified error occurred during the SSH session. </p>
+<p class="level0"><a name="80"></a><span class="nroffip">80</span> </p>
+<p class="level1">Failed to shut down the SSL connection. </p>
+<p class="level0"><a name="82"></a><span class="nroffip">82</span> </p>
+<p class="level1">Could not load CRL file, missing or wrong format. </p>
+<p class="level0"><a name="83"></a><span class="nroffip">83</span> </p>
+<p class="level1">Issuer check failed. </p>
+<p class="level0"><a name="84"></a><span class="nroffip">84</span> </p>
+<p class="level1">The FTP PRET command failed. </p>
+<p class="level0"><a name="85"></a><span class="nroffip">85</span> </p>
+<p class="level1">Mismatch of RTSP CSeq numbers. </p>
+<p class="level0"><a name="86"></a><span class="nroffip">86</span> </p>
+<p class="level1">Mismatch of RTSP Session Identifiers. </p>
+<p class="level0"><a name="87"></a><span class="nroffip">87</span> </p>
+<p class="level1">Unable to parse FTP file list. </p>
+<p class="level0"><a name="88"></a><span class="nroffip">88</span> </p>
+<p class="level1">FTP chunk callback reported error. </p>
+<p class="level0"><a name="89"></a><span class="nroffip">89</span> </p>
+<p class="level1">No connection available, the session will be queued. </p>
+<p class="level0"><a name="90"></a><span class="nroffip">90</span> </p>
+<p class="level1">SSL public key does not matched pinned public key. </p>
+<p class="level0"><a name="91"></a><span class="nroffip">91</span> </p>
+<p class="level1">Invalid SSL certificate status. </p>
+<p class="level0"><a name="92"></a><span class="nroffip">92</span> </p>
+<p class="level1">Stream error in HTTP/2 framing layer. </p>
+<p class="level0"><a name="93"></a><span class="nroffip">93</span> </p>
+<p class="level1">An API function was called from inside a callback. </p>
+<p class="level0"><a name="94"></a><span class="nroffip">94</span> </p>
+<p class="level1">An authentication function returned an error. </p>
+<p class="level0"><a name="95"></a><span class="nroffip">95</span> </p>
+<p class="level1">A problem was detected in the HTTP/3 layer. This is somewhat generic and can be one out of several problems, see the error message for details. </p>
+<p class="level0"><a name="96"></a><span class="nroffip">96</span> </p>
+<p class="level1">QUIC connection error. This error may be caused by an SSL library error. QUIC is the protocol used for HTTP/3 transfers. </p>
+<p class="level0"><a name="97"></a><span class="nroffip">97</span> </p>
+<p class="level1">Proxy handshake error. </p>
+<p class="level0"><a name="98"></a><span class="nroffip">98</span> </p>
+<p class="level1">A client-side certificate is required to complete the TLS handshake. </p>
+<p class="level0"><a name="99"></a><span class="nroffip">99</span> </p>
+<p class="level1">Poll or select returned fatal error. </p>
+<p class="level0"><a name="XX"></a><span class="nroffip">XX</span> </p>
+<p class="level1">More error codes will appear here in future releases. The existing ones are meant to never change. </p><a name="BUGS"></a><h2 class="nroffsh">Bugs</h2>
+<p class="level0">If you experience any problems with curl, submit an issue in the project&#39;s bug tracker on GitHub: <a href="https://github.com/curl/curl/issues">https://github.com/curl/curl/issues</a> </p><a name="AUTHORS"></a><h2 class="nroffsh">Authors / contributors</h2>
+<p class="level0">Daniel Stenberg is the main author, but the whole list of contributors is found in the separate THANKS file. </p><a name="WWW"></a><h2 class="nroffsh">Www</h2>
+<p class="level0"><a href="https://curl.se">https://curl.se</a> </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><span Class="bold">ftp</span>(1), <span Class="bold">wget</span>(1) </p><p class="roffit">
+ This HTML page was made with <a href="http://daniel.haxx.se/projects/roffit">roffit</a>.</p> 
+
+<!--_END_OUT-->
+  </div>
+  </div>  
+  <script>
+  var setScroll = 0;
+  function showTop(clicked) {
+   if (clicked == undefined) clicked = 0;
+   let toTop = document.getElementById("toTop");
+   if (clicked == 1) toTop.style.display = "inline-block";
+   if (setScroll == 0) {
+    setScroll = 1;
+    document.addEventListener('scroll', function() {
+     if (document.documentElement.scrollTop > 500) {      
+      toTop.style.display = 'inline-block';
+     } else {
+      toTop.style.display = 'none';
+     }
+    }); 
+   } 
+  }
+  function showLink(curTask) {
+    var curhref;
+    if (curTask == "b") { curhref = "https://curl.se/docs/"; } else { curhref = "javascript:void(0)"; }
+    var aBrokenLink = document.getElementsByTagName('a');
+    var theBrokenLink = [], theBrokenLinkIndex = 0;
+    for (i = 0; i < aBrokenLink.length; i++) {
+     if (aBrokenLink[i].href == curhref) {
+      theBrokenLink[theBrokenLinkIndex] = aBrokenLink[i];
+      theBrokenLinkIndex++;
+      aBrokenLink[i].style.background = 'yellow';
+      aBrokenLink[i].style.border = '1px solid black';
+      aBrokenLink[i].style.padding = '2px';
+     }
+    }
+    setTimeout(function() {
+     for (i in theBrokenLink) {
+      if (theBrokenLink[i].style.background == "yellow") theBrokenLink[i].style.background = "";
+     }
+    }, 800);    
+    setTimeout(function() {
+     for (i in theBrokenLink) {
+      theBrokenLink[i].style.border = '';
+      theBrokenLink[i].style.padding = '';     
+     }
+    }, 1500);  
+  }  
+  function searchOptions(txt) {
+   let optionMenu = document.getElementById("optionMenu");
+   let optionMenuLi = optionMenu.getElementsByTagName("li");
+   for (i = 0; i < optionMenuLi.length; i++) {
+    let curLI = optionMenuLi[i].innerText;
+    if (curLI.indexOf(txt) > -1) {
+     optionMenuLi[i].style.display = "";
+    } else {
+     optionMenuLi[i].style.display = "none";
+    }
+   }
+  }
+  function toggleSearchButton(showhide, onoff) {
+   let showItem = showhide.nextElementSibling;
+   let curData = onoff.dataset;
+   if (curData.onoff == 0) {
+    curData.onoff = 1;
+    showItem.style.display = "";    
+    onoff.style.background = "white";
+    onoff.style.color = "black";    
+    onoff.innerHTML = onoff.innerHTML.replace("Show", "Hide");
+   } else {
+    curData.onoff = 0;
+    showItem.style.display = "none";
+    onoff.style.background = "";
+    onoff.style.color = "";
+    onoff.innerHTML = onoff.innerHTML.replace("Hide", "Show");
+   }
+  }
+  function addOptionLinks() {
+   let optionMenu = document.getElementById("optionMenu");
+   let optionMenuLi = optionMenu.getElementsByTagName("li");
+   let fullOptionList = document.getElementById("fullOptionList");   
+   fullOptionList.style.display = "";
+   let i = 0;
+   while (i < 14) {
+    optionMenuLi[0].remove();
+    i++;
+   }
+   i = 0;
+   while (i < 4) {
+    optionMenu.children[0].remove();
+    i++;
+   }
+   optionMenuLi = fullOptionList.getElementsByTagName("li");
+   for (i = 0; i < optionMenuLi.length; i++) {
+    optionMenuLi[i].getElementsByTagName("a")[0].addEventListener("click", function() {
+     var hValue;      
+     if (this.innerHTML.indexOf(",") > -1 || this.innerHTML.indexOf("&lt;") > -1) {
+      if (this.innerHTML.indexOf(",") > -1 && this.innerHTML.indexOf("&lt;") > -1) { 
+       this.href = "#" + this.innerHTML.substr(0, this.innerHTML.indexOf(","));        
+      } else {
+       if (this.innerHTML.indexOf(",") > -1 && this.innerHTML.indexOf("&lt;") == -1) { this.href = "#" + this.innerHTML.substr(0, this.innerHTML.indexOf(",")); }       
+       else { this.href = "#" + this.innerHTML.substr(0,this.innerHTML.indexOf("&lt;")); }
+      }
+      hValue = this.href;      
+     } else {      
+      this.href = "#" + this.innerHTML;
+      hValue = this.href;      
+     }
+     let hasSpace = 1;
+     while (hasSpace == 1) {
+      if (hValue.indexOf(" ") > -1) {
+       hValue = hValue.replace(" ", "");
+      } else {
+       hasSpace = 0;
+      }
+     }         
+     if (hValue.indexOf("#-#") > -1 || hValue.indexOf("#-:") > -1) {
+      if (hValue.indexOf("#-#") > -1) { hValue = hValue.replace("#-#", "#--progress-bar"); } 
+      else { hValue = hValue.replace("#-:", "#--next"); }
+      this.href = hValue;
+     } else {
+      this.href = hValue;
+     }     
+    });
+   }
+  }
+  showTop();
+   //addOptionLinks();
+  </script>
+ </body>
+</html>
